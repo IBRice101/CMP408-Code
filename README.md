@@ -32,3 +32,7 @@ This is my CMP408 Mini-Project, a network speed tester and associated web client
 7. Green LED turns on
     - See 3
 
+## Directory Structure
+
+- RPI-Code: all code designed to run on the raspberry pi, including the speedtest application itself, Linux kernel modules, and other auxiliary programs required for functioning of the system
+- Cloud-Code: Code to run on the AWS machine, pretty much just the web server.
