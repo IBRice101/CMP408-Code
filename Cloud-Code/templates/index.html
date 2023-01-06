@@ -3,35 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Network Speedtester</title>
-    <style>
-        table, th, td {
-            border: solid 1px #DDD;
-            border-collapse: collapse;
-            padding: 2px 3px;
-            text-align: center;
-        }
-        th, td, p, input {
-            font:14px Verdana;
-        }
-        th {
-            font-weight: bold;
-        }
-    </style>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+    </head>
 <body>
-    <input type="button" onclick="CreateTable()" value="Display Data" />
+    <h1>Isaac's Speed Tester</h1>
     <table>
         <thead>
             <th>Start Time</th>
             <th>Network Name</th>
-            <th>Down Speed</th>
-            <th>Up Speed</th>
-            <th>Ping</th>
-            <th>Run Time</th>
+            <th>Down Speed (b/s)</th>
+            <th>Up Speed (b/s)</th>
+            <th>Ping (ms)</th>
+            <th>Run Time (s)</th>
         </thead>
         <tbody id="table">
         </tbody>
     </table>
+    <input type="button" class="button" onclick="CreateTable()" value="Click Here To Display Data" />
 
     <script>
         function CreateTable() {
