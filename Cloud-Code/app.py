@@ -1,4 +1,3 @@
-import json
 from flask import Flask, render_template
 
 
@@ -13,7 +12,9 @@ def index():  # put application's code here
 @app.route('/data')
 def data():
     with open('data.json', 'r') as file:
-        return file
+        data = file.read()
+        file.close()
+    return data
 
 if __name__ == '__main__':
     app.run()
