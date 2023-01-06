@@ -1,3 +1,5 @@
 Flask
 Flask-Testing
 nose
+boto3
+paho.mqtt

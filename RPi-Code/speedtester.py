@@ -27,19 +27,33 @@ def send_to_json(now, ssid, down_speed, up_speed, ping, runtime):
         "Run time": runtime
     }
 
-    filename = "speed.json"
+    filename = "data.json"
+
+    # loads the existing data from the file
+    with open(filename, "r", encoding='ascii') as infile:
+        data = []
+        while True:
+            try:
+                obj = json.load(infile)
+                data.extend(obj)
+            except ValueError:
+                # reached the end of the file
+                break
+
+    # append the new dictionary to the list of data
+    data.append(dictionary)
 
     # dumps formats it properly (dump mkes it a one-liner)
-    json_object = json.dumps(dictionary, indent = 4)
+    json_object = json.dumps(data, indent = 4)
 
-    # append instead of write so it doesn't keep getting overwritten
-    with open(filename, "a", encoding='ascii') as outfile:
-        outfile.write(json_object + ",\n")
+    # write the new list of data to the file
+    with open(filename, "w", encoding='ascii') as outfile:
+        outfile.write(json_object)
 
 def test():
     """ Performs the speedtest and prints download, upload speeds and ping """
     speed = speedtest.Speedtest()
-    
+
     # apparently I need this for ping? idk
     servernames = []
     speed.get_servers(servernames)

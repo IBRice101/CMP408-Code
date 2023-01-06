@@ -19,6 +19,40 @@
     </style>
 </head>
 <body>
+    <input type="button" onclick="CreateTable()" value="Display Data" />
+    <table>
+        <thead>
+            <th>Start Time</th>
+            <th>Network Name</th>
+            <th>Down Speed</th>
+            <th>Up Speed</th>
+            <th>Ping</th>
+            <th>Run Time</th>
+        </thead>
+        <tbody id="table">
+        </tbody>
+    </table>
 
+    <script>
+        function CreateTable() {
+            
+            const table = document.getElementById("table");
+            table.innerHTML = "";
+            fetch("/data").then(res=>res.json()).then(res => {
+                const items = res["res"];
+                items.forEach(item => {
+
+                const tr = document.createElement("tr");
+                        ["Start time", "Network name", "Down speed", "Up speed", "Ping", "Run time"].forEach(label => {
+                        const td = document.createElement("td");
+                        td.innerText = item[label];
+                        tr.appendChild(td);
+                });
+                table.appendChild(tr);
+
+                });
+         });
+        }
+    </script>
 </body>
 </html>
