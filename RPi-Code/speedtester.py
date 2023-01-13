@@ -43,7 +43,7 @@ def send_to_json(now, ssid, down_speed, up_speed, ping, runtime):
     # append the new dictionary to the list of data
     data.append(dictionary)
 
-    # dumps formats it properly (dump mkes it a one-liner)
+    # dumps formats it properly (dump makes it a one-liner)
     json_object = json.dumps(data, indent = 4)
 
     # write the new list of data to the file
@@ -55,8 +55,8 @@ def test():
     speed = speedtest.Speedtest()
 
     # apparently I need this for ping? idk
-    servernames = []
-    speed.get_servers(servernames)
+    server_names = []
+    speed.get_servers(server_names)
 
     down_speed = speed.download()
     up_speed = speed.upload()
@@ -73,7 +73,7 @@ def test():
 def main():
     """ The main function """
     start = time.time()
-    now = time.ctime(start) # neater format (no epoch for human cosumption)
+    now = time.ctime(start) # neater format (no epoch for human consumption)
     ssid = os.popen("iwgetid -r").read() # get SSID from OS shell
 
     print("Beginning speedtest of " + ssid + str(now))
