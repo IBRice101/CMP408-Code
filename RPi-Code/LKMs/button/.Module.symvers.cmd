@@ -1,0 +1,1 @@
+cmd_/home/pi/CMP408-Code/RPi-Code/LKMs/button/Module.symvers := sed 's/\.ko$$/\.o/' /home/pi/CMP408-Code/RPi-Code/LKMs/button/modules.order | scripts/mod/modpost -m -a  -o /home/pi/CMP408-Code/RPi-Code/LKMs/button/Module.symvers -e -i Module.symvers   -T -
