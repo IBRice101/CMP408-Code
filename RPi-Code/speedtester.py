@@ -72,6 +72,9 @@ def test():
 
 def main():
     """ The main function """
+    # TODO: find a way to detect when a log message (Button press detected) has
+    # been created and then only run the following when that has occurred
+    
     start = time.time()
     now = time.ctime(start) # neater format (no epoch for human consumption)
     ssid = os.popen("iwgetid -r").read() # get SSID from OS shell

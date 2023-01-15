@@ -4,16 +4,28 @@
 #include <linux/gpio.h>
 #include <linux/interrupt.h>
 
-// NOTE: this was created outwith a Raspberry Pi environent, it may need editing when it is introduced there 
 // This kernel module will register an interrupt request (IRQ) on the falling edge (i.e., button press) of the specified GPIO pin. When the button is pressed, the button_isr function will be called and a message will be printed to the kernel log.
 
-// Replace with the actual GPIO number
-#define BUTTON_GPIO 17
+// Ensure button is always on this GPIO pin, if it's not change this value
+#define BUTTON_GPIO 15
+
+static int button_pressed = 0;
 
 // This will be called when the button is pressed
 static irqreturn_t button_isr(int irq, void *data)
 {
-    printk(KERN_INFO "Button press detected\n");
+    if(!button_pressed){
+        printk(KERN_INFO "Button press detected\n");
+        button_pressed = 1;
+
+        char *argv[] = { "bash", "-c", "cd /home/pi/CMP408-Code/RPi-Code; python3 speedtester.py", NULL };
+        static char *envp[] = {
+            "HOME=/",
+            "TERM=linux",
+            "PATH=/sbin:/bin:/usr/sbin:/usr/bin", NULL };
+
+        call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
+    }
     return IRQ_HANDLED;
 }
 

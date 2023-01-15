@@ -3,8 +3,8 @@
 """
 Name: button_test.py
 Desc: a script to test if the GPIO button is working
+Auth: Soren
 Source: https://raspberrypihq.com/use-a-push-button-with-raspberry-pi-gpio/
-Auth: Isaac Basque-Rice
 Date: 14/01/2023
 """
 
