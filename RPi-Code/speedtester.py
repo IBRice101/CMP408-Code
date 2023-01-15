@@ -10,11 +10,17 @@ Date: 24/12/2022
 import time
 import json
 import os
+import signal
+import fcntl
 
 import speedtest
 
+SIGTX = 42
+REGISTER_UAPP = 0x4004667e # this is the constant value for 'Rg'
+
 def send_to_json(now, ssid, down_speed, up_speed, ping, runtime):
     """ sends data from test function to a JSON object """
+    
     ssid = str.strip(ssid) # removes \n
 
     # full list of information to send to JSON object
@@ -52,6 +58,7 @@ def send_to_json(now, ssid, down_speed, up_speed, ping, runtime):
 
 def test():
     """ Performs the speedtest and prints download, upload speeds and ping """
+    
     speed = speedtest.Speedtest()
 
     # apparently I need this for ping? idk
@@ -70,10 +77,8 @@ def test():
     # casting to int to make the numbers less unwieldy lol
     return int(down_speed), int(up_speed), int(ping)
 
-def main():
-    """ The main function """
-    # TODO: find a way to detect when a log message (Button press detected) has
-    # been created and then only run the following when that has occurred
+def handle_signal(signal, frame):
+    """ handle the signal sent by LKM """
     
     start = time.time()
     now = time.ctime(start) # neater format (no epoch for human consumption)
@@ -94,6 +99,35 @@ def main():
     send_to_json(now, ssid, down_speed, up_speed, ping, int(end-start))
 
     print("Writing complete")
+
+
+
+def main():
+    """ The main function """
+
+    print("Waiting for signal")
+
+    signal.signal(SIGTX, handle_signal)
+
+    print("PID:", os.getpid())
+
+    # Open the device file
+    try:
+        fd = os.open("/dev/irq_signal", os.O_RDONLY)
+    except OSError as e:
+        print("Could not open device file:", e)
+        exit(-1)
+
+    # Register app to KM
+    try:
+        fcntl.ioctl(fd, REGISTER_UAPP, None)
+    except OSError as e:
+        print("Error registering app:", e)
+        os.close(fd)
+        exit(-1)
+    
+    while True:
+        signal.pause() # wait for the signal to be recieved
 
 
 if __name__ == "__main__":
