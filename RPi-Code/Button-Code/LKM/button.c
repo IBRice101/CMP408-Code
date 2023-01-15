@@ -17,14 +17,6 @@ static irqreturn_t button_isr(int irq, void *data)
     if(!button_pressed){
         printk(KERN_INFO "Button press detected\n");
         button_pressed = 1;
-
-        char *argv[] = { "bash", "-c", "cd /home/pi/CMP408-Code/RPi-Code; python3 speedtester.py", NULL };
-        static char *envp[] = {
-            "HOME=/",
-            "TERM=linux",
-            "PATH=/sbin:/bin:/usr/sbin:/usr/bin", NULL };
-
-        call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
     }
     return IRQ_HANDLED;
 }
