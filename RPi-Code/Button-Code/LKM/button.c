@@ -103,19 +103,14 @@ static int __init button_init(void)
     // set up interrupt
     irq_number = gpio_to_irq(BUTTON_GPIO);
 
+    free_irq(irq_number, NULL);
+
     // Enable IRQ on falling edge (button press)
     if ((err = request_irq(irq_number, button_isr, IRQF_TRIGGER_FALLING, "button_irq", NULL))) {
         printk(KERN_ERR "Failed to request IRQ\n");
         gpio_free(BUTTON_GPIO);
         return err;
     }
-
-    if(request_irq(irq_number, (irq_handler_t) button_signal_handler, IRQF_TRIGGER_RISING, "button_irq_signal", NULL) != 0)
-    {
-		printk("Error!\nCan not request interrupt nr.: %d\n", irq_number);
-		gpio_free(BUTTON_GPIO);
-		return -1;
-	}
 
 	if(register_chrdev(BUTTON_MAJOR, "gpio_irq_signal", &fops) < 0) 
     {
@@ -133,7 +128,7 @@ static int __init button_init(void)
 static void __exit button_exit(void)
 {
     // Free the IRQ and GPIO
-    free_irq(gpio_to_irq(BUTTON_GPIO), NULL);
+    free_irq(irq_number, NULL);
     gpio_free(BUTTON_GPIO);
 
     printk(KERN_INFO "Button module removed\n");
