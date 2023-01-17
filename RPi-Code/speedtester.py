@@ -15,7 +15,7 @@ import fcntl
 
 import speedtest
 
-SIGTX = 42
+SIGTX = 44
 REGISTER_UAPP = 0x4004667e # this is the constant value for 'Rg'
 
 def send_to_json(now, ssid, down_speed, up_speed, ping, runtime):
@@ -80,6 +80,35 @@ def test():
 def handle_signal(signal, frame):
     """ handle the signal sent by LKM """
     
+
+
+def main():
+    """ The main function """
+
+    # print("Waiting for signal")
+
+    # signal.signal(SIGTX, handle_signal)
+
+    # print("PID:", os.getpid())
+
+    # Open the device file
+    # try:
+        # fd = os.open("/dev/irq_signal", os.O_RDONLY)
+    # except OSError as e:
+        # print("Could not open device file:", e)
+        # exit(-1)
+
+    # Register app to KM
+    # try:
+        # fcntl.ioctl(fd, REGISTER_UAPP, 0)
+    # except OSError as e:
+        # print("Error registering app:", e)
+        # os.close(fd)
+        # exit(-1)
+    
+    # while True:
+        # signal.pause() # wait for the signal to be recieved
+
     start = time.time()
     now = time.ctime(start) # neater format (no epoch for human consumption)
     ssid = os.popen("iwgetid -r").read() # get SSID from OS shell
@@ -100,34 +129,6 @@ def handle_signal(signal, frame):
 
     print("Writing complete")
 
-
-
-def main():
-    """ The main function """
-
-    print("Waiting for signal")
-
-    signal.signal(SIGTX, handle_signal)
-
-    print("PID:", os.getpid())
-
-    # Open the device file
-    try:
-        fd = os.open("/dev/irq_signal", os.O_RDONLY)
-    except OSError as e:
-        print("Could not open device file:", e)
-        exit(-1)
-
-    # Register app to KM
-    try:
-        fcntl.ioctl(fd, REGISTER_UAPP, None)
-    except OSError as e:
-        print("Error registering app:", e)
-        os.close(fd)
-        exit(-1)
-    
-    while True:
-        signal.pause() # wait for the signal to be recieved
 
 
 if __name__ == "__main__":

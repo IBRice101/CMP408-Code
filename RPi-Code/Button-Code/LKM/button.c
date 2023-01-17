@@ -15,7 +15,7 @@ MODULE_AUTHOR("Isaac Basque-Rice");
 MODULE_DESCRIPTION("A simple Linux kernel module to detect button press on a Raspberry Pi");
 
 // Ensure button is always on this GPIO pin, if it's not change this value
-#define BUTTON_GPIO 15
+#define BUTTON_GPIO 17
 
 #define BUTTON_MAJOR 64
 
@@ -29,7 +29,7 @@ static int button_pressed = 0;
 static struct task_struct *task = NULL;
 
 // Define for signal sending
-#define SIGNR 42
+#define SIGNR 44
 
 // This calls an interrupt service routine when the interrupt is triggered
 static irq_handler_t button_signal_handler(unsigned int irq, void *dev_id, struct pt_regs *regs)
