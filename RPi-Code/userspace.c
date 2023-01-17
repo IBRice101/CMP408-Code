@@ -6,7 +6,7 @@
 #include <signal.h>
 
 #define SIGTX 44
-#define REGISTER_UAPP _IO('R', 'g')
+#define REGISTER_SAPP _IO('R', 'g')
 
 // This app serves as a userspace intermediary between the LKM running on the Pi and the Speedtester app
 // Python is seemingly unable to interface between itself and the LKM so as a result it was easier to implement this in C

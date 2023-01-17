@@ -1,11 +1,12 @@
 #include <linux/module.h>
-#include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/gpio.h>
+#include <linux/cdev.h>
 #include <linux/interrupt.h>
-#include <linux/sched.h>
 #include <linux/fs.h>
+#include <linux/sched.h/signal.h>
 #include <linux/ioctl.h>
+#include <linux/kernel.h>
 
 // This kernel module will register an interrupt request (IRQ) on the falling edge 
 // (i.e., button press) of the specified GPIO pin. This will then trigger the speedtest.py program
@@ -35,7 +36,7 @@ static struct task_struct *task = NULL;
 static irq_handler_t button_signal_handler(unsigned int irq, void *dev_id, struct pt_regs *regs)
 {
     struct siginfo info;
-    printk("gpio_irq_signal: Interrupt was triggered and ISR was called!\n");
+    printk("Interrupt was triggered and ISR was called\n");
 
 	if(task != NULL) {
 		memset(&info, 0, sizeof(info));
@@ -44,7 +45,7 @@ static irq_handler_t button_signal_handler(unsigned int irq, void *dev_id, struc
 
 		/* Send the signal */
 		if(send_sig_info(SIGNR, (struct kernel_siginfo *) &info, task) < 0)
-			printk("gpio_irq_signal: Error sending signal\n");
+			printk("Error sending signal\n");
 	}
 	return (irq_handler_t) IRQ_HANDLED;
 }
@@ -57,16 +58,6 @@ static long int button_ioctl(struct file *file, unsigned cmd, unsigned long arg)
         printk("Userspace app with PID %d is registered \n", task->pid);
     }
     return 0;
-}
-
-// This will be called when the button is pressed
-static irqreturn_t button_isr(int irq, void *data)
-{
-    if(!button_pressed){
-        printk(KERN_INFO "Button press detected\n");
-        button_pressed = 1; // ensure button press only registered once
-    }
-    return IRQ_HANDLED;
 }
 
 // This function is called when the device file is opened
@@ -87,18 +78,26 @@ static int __init button_init(void)
 {
     int err = 0;
 
+	printk("Loading module... ");
+
     // Request the GPIO
     if (!gpio_is_valid(BUTTON_GPIO)) {
         printk(KERN_ERR "Invalid GPIO\n");
         return -ENODEV;
     }
+
+	if(gpio_direction_input(BUTTON_GPIO)) {
+		printk("Error!\nCan not set GPIO 17 to input!\n");
+		gpio_free(BUTTON_GPIO);
+		return -1;
+	}
+
     if ((err = gpio_request(BUTTON_GPIO, "button_gpio"))) {
         printk(KERN_ERR "Failed to request GPIO\n");
         return err;
     }
 
-    // Set the GPIO as an input
-    gpio_direction_input(BUTTON_GPIO);
+	gpio_set_debounce(BUTTON_GPIO, 300);
 
     // set up interrupt
     irq_number = gpio_to_irq(BUTTON_GPIO);
@@ -119,17 +118,20 @@ static int __init button_init(void)
 		free_irq(irq_number, NULL);
 	}
 
-
     printk(KERN_INFO "Button module initialized\n");
+	printk("GPIO pin is mapped to IRQ no.: %d\n", irq_number);
 
     return 0;
 }
 
 static void __exit button_exit(void)
 {
+    printk("Unloading module...")
     // Free the IRQ and GPIO
     free_irq(irq_number, NULL);
     gpio_free(BUTTON_GPIO);
+	unregister_chrdev(MYMAJOR, "gpio_irq_signal");
+    printk("Module unloaded\n")
 
     printk(KERN_INFO "Button module removed\n");
 }
