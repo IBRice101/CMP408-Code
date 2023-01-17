@@ -12,6 +12,8 @@
 // Python is seemingly unable to interface between itself and the LKM so as a result it was easier to implement this in C
 // Partial credit is due to Johannes4Linux who provided boilerplate to allow for the LKM to actually interface with a userspace application
 
+// FIXME: run only once and then wait
+
 void signalhandler(int sig) {
 	FILE *fp;
     char path[1035];
@@ -52,7 +54,7 @@ int main() {
 	}
 
 	/* Register app to KM */
-	if(ioctl(fd, REGISTER_UAPP, NULL)) {
+	if(ioctl(fd, REGISTER_SAPP, NULL)) {
 		perror("Error registering app");
 		close(fd);
 		return -1;

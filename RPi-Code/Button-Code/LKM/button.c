@@ -4,12 +4,14 @@
 #include <linux/cdev.h>
 #include <linux/interrupt.h>
 #include <linux/fs.h>
-#include <linux/sched.h/signal.h>
+#include <linux/sched/signal.h>
 #include <linux/ioctl.h>
 #include <linux/kernel.h>
 
 // This kernel module will register an interrupt request (IRQ) on the falling edge 
 // (i.e., button press) of the specified GPIO pin. This will then trigger the speedtest.py program
+
+// FIXME: run only once and then wait
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Isaac Basque-Rice");
@@ -22,8 +24,6 @@ MODULE_DESCRIPTION("A simple Linux kernel module to detect button press on a Ras
 
 // pin number / interrupt controller to which BUTTON_GPIO is mapped
 unsigned int irq_number;
-
-static int button_pressed = 0;
 
 // Variables for speedtester registration
 #define REGISTER_SAPP _IO('R', 'g')
@@ -105,7 +105,7 @@ static int __init button_init(void)
     free_irq(irq_number, NULL);
 
     // Enable IRQ on falling edge (button press)
-    if ((err = request_irq(irq_number, button_isr, IRQF_TRIGGER_FALLING, "button_irq", NULL))) {
+    if ((err = request_irq(irq_number, (irq_handler_t) button_signal_handler, IRQF_TRIGGER_FALLING, "button_irq", NULL))) {
         printk(KERN_ERR "Failed to request IRQ\n");
         gpio_free(BUTTON_GPIO);
         return err;
@@ -126,14 +126,12 @@ static int __init button_init(void)
 
 static void __exit button_exit(void)
 {
-    printk("Unloading module...")
+    printk("Unloading module...");
     // Free the IRQ and GPIO
     free_irq(irq_number, NULL);
     gpio_free(BUTTON_GPIO);
-	unregister_chrdev(MYMAJOR, "gpio_irq_signal");
-    printk("Module unloaded\n")
-
-    printk(KERN_INFO "Button module removed\n");
+	unregister_chrdev(BUTTON_MAJOR, "gpio_irq_signal");
+    printk("Module unloaded\n");
 }
 
 module_init(button_init);
