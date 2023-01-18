@@ -12,18 +12,17 @@
 Python is seemingly unable to interface between itself and the LKM so as a result it was easier to implement this in C
 Partial credit is due to Johannes4Linux who provided boilerplate to allow for the LKM to actually interface with a userspace application */
 
-// FIXME: run only once and then wait
-
 void signalhandler(int sig) {
 	FILE *fp;
     char path[1035];
 
-    printf("Running speedtester.py\n");
+    printf("Userspace: Signal Recieved!\n");
+    printf("Userspace: Running speedtester.py\n\n");
 
     // Open the command for reading. 
     fp = popen("python3 speedtester.py", "r");
     if (fp == NULL) {
-        printf("Failed to run command\n" );
+        printf("Usersapce: Failed to run command\n" );
         exit(1);
     }
 
@@ -35,7 +34,7 @@ void signalhandler(int sig) {
     // close 
     pclose(fp);
 
-    printf("Speedtest completed\n");
+    printf("Userspace: Wait for signal...\n");
 
     return 0;
 }
@@ -49,20 +48,20 @@ int main() {
 	// Open the device file 
 	fd = open("/dev/irq_signal", O_RDONLY);
 	if(fd < 0) {
-		perror("Could not open device file");
+		perror("Userspace: Could not open device file");
 		return -1;
 	}
 
 	// Register app to KM 
 	if(ioctl(fd, REGISTER_SAPP, NULL)) {
-		perror("Error registering app");
+		perror("Userspace: Error registering app");
 		close(fd);
 		return -1;
 	}
 
 
 	// Wait for Signal 
-	printf("Wait for signal...\n");
+	printf("Userspace: Wait for signal...\n");
 	while(1)
 		sleep(1);
 

@@ -86,7 +86,7 @@ def main():
     now = time.ctime(start) # neater format (no epoch for human consumption)
     ssid = os.popen("iwgetid -r").read() # get SSID from OS shell
 
-    print("Beginning speedtest of " + ssid + str(now))
+    print("SSID: " + ssid + "\nStart Time: " +  str(now))
 
     # run the function and grab all the values
     down_speed, up_speed, ping = test()
@@ -100,7 +100,7 @@ def main():
     # send that to the JSON object
     send_to_json(now, ssid, down_speed, up_speed, ping, int(end-start))
 
-    print("Writing complete")
+    print("Speedtest complete\n")
 
 
 
