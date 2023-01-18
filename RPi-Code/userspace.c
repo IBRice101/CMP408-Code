@@ -8,9 +8,9 @@
 #define SIGTX 44
 #define REGISTER_SAPP _IO('R', 'g')
 
-// This app serves as a userspace intermediary between the LKM running on the Pi and the Speedtester app
-// Python is seemingly unable to interface between itself and the LKM so as a result it was easier to implement this in C
-// Partial credit is due to Johannes4Linux who provided boilerplate to allow for the LKM to actually interface with a userspace application
+/* This app serves as a userspace intermediary between the LKM running on the Pi and the Speedtester app
+Python is seemingly unable to interface between itself and the LKM so as a result it was easier to implement this in C
+Partial credit is due to Johannes4Linux who provided boilerplate to allow for the LKM to actually interface with a userspace application */
 
 // FIXME: run only once and then wait
 
@@ -20,19 +20,19 @@ void signalhandler(int sig) {
 
     printf("Running speedtester.py\n");
 
-    /* Open the command for reading. */
+    // Open the command for reading. 
     fp = popen("python3 speedtester.py", "r");
     if (fp == NULL) {
         printf("Failed to run command\n" );
         exit(1);
     }
 
-    /* Read the output a line at a time - output it. */
+    // Read the output a line at a time - output it. 
     while (fgets(path, sizeof(path)-1, fp) != NULL) {
         printf("%s", path);
     }
 
-    /* close */
+    // close 
     pclose(fp);
 
     printf("Speedtest completed\n");
@@ -46,14 +46,14 @@ int main() {
 
 	printf("PID: %d\n", getpid());
 
-	/* Open the device file */
+	// Open the device file 
 	fd = open("/dev/irq_signal", O_RDONLY);
 	if(fd < 0) {
 		perror("Could not open device file");
 		return -1;
 	}
 
-	/* Register app to KM */
+	// Register app to KM 
 	if(ioctl(fd, REGISTER_SAPP, NULL)) {
 		perror("Error registering app");
 		close(fd);
@@ -61,7 +61,7 @@ int main() {
 	}
 
 
-	/* Wait for Signal */
+	// Wait for Signal 
 	printf("Wait for signal...\n");
 	while(1)
 		sleep(1);
