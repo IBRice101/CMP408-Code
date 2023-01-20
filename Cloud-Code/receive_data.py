@@ -15,12 +15,14 @@ import paho.mqtt.client as mqtt
 # Create an MQTT client
 client = mqtt.Client()
 
+
 # Set up a callback function to be called when a message is received
 def on_message(userdata, message):
     '''Callback function to be called when a message is received on the MQTT topic.'''
     # Parse the JSON data from the message
     data = json.loads(message.payload)
     # TODO: write code to update the website here
+
 
 # Connect to MQTT broker (Raspberry Pi)
 client.connect('your-broker-address', 1883)
