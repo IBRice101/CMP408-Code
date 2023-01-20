@@ -6,7 +6,7 @@ h1 {
     text-align: center;
     padding: 10px;
     color: #f8f8f2;
-    font: helvetica
+    font:32px helvetica, verdana, sans-serif;
 }
 
 table {
