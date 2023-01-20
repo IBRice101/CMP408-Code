@@ -1,0 +1,38 @@
+    1  sudo apt-get update
+    2  sudo apt-get upgrade
+    3  clear
+    4  git clone https://github.com/IBRice101/CMP408-Code.git
+    5  ls
+    6  mv CMP408-Code/Cloud-Code/* ./SpeedtesterWebapp/
+    7  mkdir SpeedtesterWebapp; mv CMP408-Code/Cloud-Code/* ./SpeedtesterWebapp/
+    8  ls
+    9  cp SpeedtesterWebapp/* CMP408-Code/Cloud-Code/
+   10  cp SpeedtesterWebapp/* CMP408-Code/Cloud-Code/ -r
+   11  cd CMP408-Code/Cloud-Code/
+   12  ls
+   13  cd
+   14  cd SpeedtesterWebapp/
+   15  clear
+   16  sudo apt-get install python3-venv
+   17  python3 -m venv venv
+   18  source venv/bin/activate
+   19  pip install Flask
+   20  pip install gunicorn
+   21  gunicorn -b 0.0.0.0:8000 app:app
+   22  sudo apt-get install vim
+   23  sudo vim /etc/systemd/system/speedtester.service
+   24  ls
+   25  pwd
+   26  sudo vim /etc/systemd/system/speedtester.service
+   27  sudo systemctl daemon-reload 
+   28  sudo systemctl start speedtester
+   29  sudo systemctl enable speedtester
+   30  curl localhost:8000
+   31  sudo apt-get nginx
+   32  sudo apt-get install nginx
+   33  sudo systemctl start nginx
+   34  sudo systemctl enable nginx
+   35  sudo vim /etc/nginx/sites-available/default 
+   36  sudo systemctl restart nginx
+   37  history
+   38  history >> ../CMP408-Code/Cloud-Code/setup-steps.txt
