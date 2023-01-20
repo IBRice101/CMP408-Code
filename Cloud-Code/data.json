@@ -30,5 +30,69 @@
         "Up speed": 15614362,
         "Ping": 27,
         "Run time": 59
+    },
+    {
+        "Start time": "Sun Jan 15 00:33:52 2023",
+        "Network name": "The Internet",
+        "Down speed": 19597035,
+        "Up speed": 22075569,
+        "Ping": 33,
+        "Run time": 30
+    },
+    {
+        "Start time": "Tue Jan 17 17:20:17 2023",
+        "Network name": "The Internet",
+        "Down speed": 19722553,
+        "Up speed": 16024808,
+        "Ping": 28,
+        "Run time": 59
+    },
+    {
+        "Start time": "Tue Jan 17 20:35:57 2023",
+        "Network name": "The Internet",
+        "Down speed": 18615201,
+        "Up speed": 15586293,
+        "Ping": 29,
+        "Run time": 30
+    },
+    {
+        "Start time": "Tue Jan 17 20:37:59 2023",
+        "Network name": "The Internet",
+        "Down speed": 20142002,
+        "Up speed": 15262682,
+        "Ping": 26,
+        "Run time": 31
+    },
+    {
+        "Start time": "Wed Jan 18 15:08:55 2023",
+        "Network name": "The Internet",
+        "Down speed": 18913042,
+        "Up speed": 15711955,
+        "Ping": 30,
+        "Run time": 34
+    },
+    {
+        "Start time": "Wed Jan 18 16:34:22 2023",
+        "Network name": "The Internet",
+        "Down speed": 19542466,
+        "Up speed": 16040905,
+        "Ping": 33,
+        "Run time": 29
+    },
+    {
+        "Start time": "Wed Jan 18 16:41:18 2023",
+        "Network name": "The Internet",
+        "Down speed": 19109990,
+        "Up speed": 15950691,
+        "Ping": 29,
+        "Run time": 30
+    },
+    {
+        "Start time": "Wed Jan 18 16:41:58 2023",
+        "Network name": "The Internet",
+        "Down speed": 20201038,
+        "Up speed": 17260445,
+        "Ping": 29,
+        "Run time": 29
     }
 ]
