@@ -10,10 +10,9 @@ Date: 24/12/2022
 import time
 import json
 import os
-import signal
-import fcntl
 
 import speedtest
+import paho.mqtt.client as mqtt
 
 def send_to_json(now, ssid, down_speed, up_speed, ping, runtime):
     """ sends data from test function to a JSON object """
@@ -74,9 +73,29 @@ def test():
     # casting to int to make the numbers less unwieldy lol
     return int(down_speed), int(up_speed), int(ping)
 
-def handle_signal(signal, frame):
-    """ handle the signal sent by LKM """
-    
+def send_data():
+
+    # Address of broker (aws ec2 instance)
+    broker = '3.82.195.208'
+
+    # Load the data from your JSON file
+    with open('data.json', 'r', encoding='ascii') as f:
+        data = json.load(f)
+
+    # Convert the data to a JSON string
+    json_data = json.dumps(data)
+
+    # Create an MQTT client
+    client = mqtt.Client()
+
+    # Connect to your MQTT broker (could be your AWS server)
+    client.connect(broker, 1883)
+
+    # Publish the JSON data to a topic on your MQTT broker
+    client.publish('speedtest-data', json_data)
+
+    # Disconnect from the MQTT broker
+    client.disconnect()
 
 
 def main():
@@ -99,6 +118,9 @@ def main():
 
     # send that to the JSON object
     send_to_json(now, ssid, down_speed, up_speed, ping, int(end-start))
+
+    # TODO: Send to server using MQTT
+
 
     print("Speedtest complete\n")
 
