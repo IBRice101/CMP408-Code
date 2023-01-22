@@ -94,5 +94,29 @@
         "Up speed": 17260445,
         "Ping": 29,
         "Run time": 29
+    },
+    {
+        "Start time": "Sun Jan 22 14:50:26 2023",
+        "Network name": "The Internet",
+        "Down speed": 19604002,
+        "Up speed": 8957240,
+        "Ping": 29,
+        "Run time": 32
+    },
+    {
+        "Start time": "Sun Jan 22 15:01:09 2023",
+        "Network name": "The Internet",
+        "Down speed": 19997312,
+        "Up speed": 16455520,
+        "Ping": 34,
+        "Run time": 30
+    },
+    {
+        "Start time": "Sun Jan 22 15:03:13 2023",
+        "Network name": "The Internet",
+        "Down speed": 19966521,
+        "Up speed": 16034244,
+        "Ping": 25,
+        "Run time": 30
     }
 ]
