@@ -1,0 +1,98 @@
+[
+    {
+        "Start time": "Fri Jan  6 16:00:29 2023",
+        "Network name": "SKYRKIZ6",
+        "Down speed": 48296853,
+        "Up speed": 17321237,
+        "Ping": 36,
+        "Run time": 22
+    },
+    {
+        "Start time": "Fri Jan  6 16:04:02 2023",
+        "Network name": "SKYRKIZ6",
+        "Down speed": 47174734,
+        "Up speed": 17611890,
+        "Ping": 25,
+        "Run time": 84
+    },
+    {
+        "Start time": "Fri Jan  6 17:14:24 2023",
+        "Network name": "SKYRKIZ6",
+        "Down speed": 48662529,
+        "Up speed": 18340944,
+        "Ping": 31,
+        "Run time": 112
+    },
+    {
+        "Start time": "Fri Jan 13 15:03:57 2023",
+        "Network name": "The Internet",
+        "Down speed": 19871379,
+        "Up speed": 15614362,
+        "Ping": 27,
+        "Run time": 59
+    },
+    {
+        "Start time": "Sun Jan 15 00:33:52 2023",
+        "Network name": "The Internet",
+        "Down speed": 19597035,
+        "Up speed": 22075569,
+        "Ping": 33,
+        "Run time": 30
+    },
+    {
+        "Start time": "Tue Jan 17 17:20:17 2023",
+        "Network name": "The Internet",
+        "Down speed": 19722553,
+        "Up speed": 16024808,
+        "Ping": 28,
+        "Run time": 59
+    },
+    {
+        "Start time": "Tue Jan 17 20:35:57 2023",
+        "Network name": "The Internet",
+        "Down speed": 18615201,
+        "Up speed": 15586293,
+        "Ping": 29,
+        "Run time": 30
+    },
+    {
+        "Start time": "Tue Jan 17 20:37:59 2023",
+        "Network name": "The Internet",
+        "Down speed": 20142002,
+        "Up speed": 15262682,
+        "Ping": 26,
+        "Run time": 31
+    },
+    {
+        "Start time": "Wed Jan 18 15:08:55 2023",
+        "Network name": "The Internet",
+        "Down speed": 18913042,
+        "Up speed": 15711955,
+        "Ping": 30,
+        "Run time": 34
+    },
+    {
+        "Start time": "Wed Jan 18 16:34:22 2023",
+        "Network name": "The Internet",
+        "Down speed": 19542466,
+        "Up speed": 16040905,
+        "Ping": 33,
+        "Run time": 29
+    },
+    {
+        "Start time": "Wed Jan 18 16:41:18 2023",
+        "Network name": "The Internet",
+        "Down speed": 19109990,
+        "Up speed": 15950691,
+        "Ping": 29,
+        "Run time": 30
+    },
+    {
+        "Start time": "Wed Jan 18 16:41:58 2023",
+        "Network name": "The Internet",
+        "Down speed": 20201038,
+        "Up speed": 17260445,
+        "Ping": 29,
+        "Run time": 29
+    }
+]
