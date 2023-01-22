@@ -19,17 +19,17 @@ broker = '3.82.195.208'
 # Create an MQTT client
 client = mqtt.Client()
 
+def replace_json(data):
+    with open('data.json', 'w') as f:
+        json.dump(data, f)
+
 # Set up a callback function to be called when a message is received
 def on_message(userdata, message):
     '''Callback function to be called when a message is received on the MQTT topic.'''
     # Parse the JSON data from the message
     data = json.loads(message.payload.decode("ascii", "ignore"))
-    dynamodb = boto3.resource("dynamodb")
-    table = dynamodb.Table("speedtest")
-    data["Upload"] = Decimal(data["Upload"])
-    data["Download"] = Decimal(data["Download"])
-    table.put_item(Item=data)
-    # TODO: write code to update the website here
+    # Use the data to replace the already existing json file
+    replace_json(data)
 
 
 # Connect to MQTT broker (Raspberry Pi)
