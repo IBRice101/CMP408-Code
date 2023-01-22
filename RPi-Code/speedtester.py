@@ -73,48 +73,6 @@ def test():
     # casting to int to make the numbers less unwieldy lol
     return int(down_speed), int(up_speed), int(ping)
 
-def send_data():
-    # Address of broker (aws ec2 instance)
-    broker = '35.173.187.104'
-
-    # Get the results of the test function
-    down_speed, up_speed, ping = test()
-
-    # Get the current time and SSID
-    now = time.ctime(time.time())
-    ssid = os.popen("iwgetid -r").read()
-
-    # Load the data from your JSON file
-    with open('data.json', 'r', encoding='ascii') as f:
-        data = json.load(f)
-
-    # Create a new dictionary with the test results
-    new_data = {
-        "Start time": now,
-        "Network name": ssid,
-        "Down speed": down_speed,
-        "Up speed": up_speed,
-        "Ping": ping,
-    }
-
-    # Append the new dictionary to the data read from the JSON file
-    data.append(new_data)
-
-    # Convert the data to a JSON string
-    json_data = json.dumps(data)
-
-    # Create an MQTT client
-    client = mqtt.Client()
-
-    # Connect to your MQTT broker (could be your AWS server)
-    client.connect(broker, 1883)
-
-    # Publish the JSON data to a topic on your MQTT broker
-    client.publish('speedtest-data', json_data)
-
-    # Disconnect from the MQTT broker
-    client.disconnect()
-
 
 def main():
     """ The main function """
@@ -136,10 +94,6 @@ def main():
 
     # send that to the JSON object
     send_to_json(now, ssid, down_speed, up_speed, ping, int(end-start))
-
-    print("Sending data to server")
-    send_data()
-    print("Data sent")
 
     print("Speedtest complete\n")
 

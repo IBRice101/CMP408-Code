@@ -22,7 +22,7 @@ void signalhandler(int sig) {
     // Open the command for reading. 
     fp = popen("python3 speedtester.py", "r");
     if (fp == NULL) {
-        printf("Usersapce: Failed to run command\n" );
+        printf("Usersapce: Failed to run speedtester\n" );
         exit(1);
     }
 
@@ -33,6 +33,24 @@ void signalhandler(int sig) {
 
     // close 
     pclose(fp);
+
+    printf("Userspace: Running mqtt_sender.py\n\n");
+
+    // Open the command for reading. 
+    fp = popen("python3 mqtt_sender.py", "r");
+    if (fp == NULL) {
+        printf("Usersapce: Failed to run mqtt_sender\n" );
+        exit(1);
+    }
+
+    // Read the output a line at a time - output it. 
+    while (fgets(path, sizeof(path)-1, fp) != NULL) {
+        printf("%s", path);
+    }
+
+    // close 
+    pclose(fp);
+
 
     printf("Userspace: Wait for signal...\n");
 
