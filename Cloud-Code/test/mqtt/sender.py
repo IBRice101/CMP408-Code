@@ -1,11 +1,16 @@
 import paho.mqtt.client as mqtt
 
 # MQTT settings
-broker_address = "35.173.187.104"
+broker_address = "3.91.200.59"
+username = "user"
+password = "password"
 topic = "testdata"
 
 # Create MQTT client
 client = mqtt.Client()
+
+# Set username and password as auth tokens
+client.username_pw_set(username, password)
 
 # Connect to broker
 client.connect(broker_address)
