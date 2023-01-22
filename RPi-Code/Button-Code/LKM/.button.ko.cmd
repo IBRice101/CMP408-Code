@@ -1,1 +1,0 @@
-cmd_/home/pi/CMP408-Code/RPi-Code/Button-Code/LKM/button.ko := ld -r  -EL -z noexecstack   --build-id=sha1  -T scripts/module.lds -o /home/pi/CMP408-Code/RPi-Code/Button-Code/LKM/button.ko /home/pi/CMP408-Code/RPi-Code/Button-Code/LKM/button.o /home/pi/CMP408-Code/RPi-Code/Button-Code/LKM/button.mod.o;  true
