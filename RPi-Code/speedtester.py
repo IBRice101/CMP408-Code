@@ -13,6 +13,7 @@ import os
 
 import speedtest
 import paho.mqtt.client as mqtt
+import RPi.GPIO as GPIO
 
 def send_to_json(now, ssid, down_speed, up_speed, ping, runtime):
     """ sends data from test function to a JSON object """
@@ -78,6 +79,16 @@ def main():
     """ The main function """
 
     start = time.time()
+
+    # GPIO Settings
+    pin_number = 9
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    GPIO.setup(pin_number,GPIO.OUT)
+
+    # Turn on LED
+    GPIO.output(pin_number, GPIO.LOW)
+
     now = time.ctime(start) # neater format (no epoch for human consumption)
     ssid = os.popen("iwgetid -r").read() # get SSID from OS shell
 
@@ -94,6 +105,9 @@ def main():
 
     # send that to the JSON object
     send_to_json(now, ssid, down_speed, up_speed, ping, int(end-start))
+
+    # Turn off LED
+    GPIO.output(pin_number, GPIO.HIGH)
 
     print("Speedtest complete\n")
 

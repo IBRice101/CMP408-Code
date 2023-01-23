@@ -158,5 +158,13 @@
         "Up speed": 15190476,
         "Ping": 34,
         "Run time": 33
+    },
+    {
+        "Start time": "Mon Jan 23 14:17:20 2023",
+        "Network name": "The Internet",
+        "Down speed": 14249560,
+        "Up speed": 16870365,
+        "Ping": 42,
+        "Run time": 29
     }
 ]
