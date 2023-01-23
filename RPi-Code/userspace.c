@@ -16,13 +16,13 @@ void signalhandler(int sig) {
 	FILE *fp;
     char path[1035];
 
-    printf("Userspace: Signal Recieved!\n");
+    printf("Userspace: Signal Received!\n");
     printf("Userspace: Running speedtester.py\n\n");
 
     // Open the command for reading. 
     fp = popen("python3 speedtester.py", "r");
     if (fp == NULL) {
-        printf("Usersapce: Failed to run speedtester\n" );
+        printf("Userspace: Failed to run speedtester\n" );
         exit(1);
     }
 
@@ -39,7 +39,7 @@ void signalhandler(int sig) {
     // Open the command for reading. 
     fp = popen("python3 mqtt_sender.py", "r");
     if (fp == NULL) {
-        printf("Usersapce: Failed to run mqtt_sender\n" );
+        printf("Userspace: Failed to run mqtt_sender\n" );
         exit(1);
     }
 
