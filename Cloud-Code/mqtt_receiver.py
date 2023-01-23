@@ -2,20 +2,19 @@
 
 """
 Name: mqtt_receiver.py
-Desc: an app to receieve the data.json file over MQTT from the Raspberry Pi
+Desc: an app to receive the data.json file over MQTT from the Raspberry Pi
 Auth: Isaac Basque-Rice
 Date 22/01/2023
 """
 
 import paho.mqtt.client as mqtt
-import time
 import json
 
 # MQTT settings
 broker_address = "3.91.200.59"
 username = "user"
 password = "password"
-topic = "testdata"
+topic = "speedtest-data"
 
 # Create MQTT client
 client = mqtt.Client()

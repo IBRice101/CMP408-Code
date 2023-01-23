@@ -14,7 +14,7 @@ import json
 broker_address = "3.91.200.59"
 username = "user"
 password = "password"
-topic = "testdata"
+topic = "speedtest-data"
 
 # Create MQTT client
 client = mqtt.Client()
