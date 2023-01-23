@@ -11,7 +11,7 @@ import paho.mqtt.client as mqtt
 import json
 
 # MQTT settings
-broker_address = "3.91.200.59"
+broker_address = "52.207.233.32"
 username = "user"
 password = "password"
 topic = "speedtest-data"

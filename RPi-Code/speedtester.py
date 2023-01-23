@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Name: speedtest.py
+Name: speedtester.py
 Desc: a program to test the speed of a computer network
 Auth: Isaac Basque-Rice
 Date: 24/12/2022

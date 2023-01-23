@@ -30,7 +30,7 @@
             const table = document.getElementById("table");
             table.innerHTML = "";
             fetch("/data").then(res=>res.json()).then(res => {
-                const items = res;  // Change this line to access the data directly
+                const items = res;
                 items.forEach(item => {
 
                     const tr = document.createElement("tr");
