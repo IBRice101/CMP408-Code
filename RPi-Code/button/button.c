@@ -11,8 +11,6 @@
 // This kernel module will register an interrupt request (IRQ) on the falling edge 
 // (i.e., button press) of the specified GPIO pin. This will then trigger the speedtest.py program
 
-// FIXME: run only once and then wait
-
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Isaac Basque-Rice");
 MODULE_DESCRIPTION("A simple Linux kernel module to detect button press on a Raspberry Pi");
