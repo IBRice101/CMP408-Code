@@ -166,5 +166,37 @@
         "Up speed": 16870365,
         "Ping": 42,
         "Run time": 29
+    },
+    {
+        "Start time": "Mon Jan 23 19:34:01 2023",
+        "Network name": "The Internet",
+        "Down speed": 19806867,
+        "Up speed": 15624434,
+        "Ping": 34,
+        "Run time": 29
+    },
+    {
+        "Start time": "Mon Jan 23 19:38:06 2023",
+        "Network name": "The Internet",
+        "Down speed": 19603792,
+        "Up speed": 16361778,
+        "Ping": 34,
+        "Run time": 29
+    },
+    {
+        "Start time": "Mon Jan 23 19:38:55 2023",
+        "Network name": "The Internet",
+        "Down speed": 18850555,
+        "Up speed": 16280695,
+        "Ping": 29,
+        "Run time": 29
+    },
+    {
+        "Start time": "Mon Jan 23 19:41:16 2023",
+        "Network name": "The Internet",
+        "Down speed": 13957448,
+        "Up speed": 16949729,
+        "Ping": 25,
+        "Run time": 29
     }
 ]
